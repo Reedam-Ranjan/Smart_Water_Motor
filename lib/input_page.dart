@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:smart_water_motor/networking.dart';
 import 'constants.dart';
 import 'reusable_card.dart';
 import 'project_page.dart';
 import 'bottom_button.dart';
 import 'package:http/http.dart' as http;
-
+import 'api_model.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -12,18 +13,19 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+
+  dynamic FlowSensor = NetworkHelper(url: kFlowSensorApi);
+  dynamic RefreshValues =  NetworkHelper(url: kRefreshValuesApi);
+  dynamic HandleRelay = NetworkHelper(url: kHandleRelayApi);
+  dynamic RelayState = NetworkHelper(url: kRelaySateApi);
+  dynamic TankPercentageLevel = NetworkHelper(url: kTankPercentageLevelApi);
+  dynamic TankWaterLevel = NetworkHelper(url: kTankWaterLevelApi);
+  dynamic SetTankCapacity = NetworkHelper(url: kSetTankCapacityApi);
+
+
   bool On = false;
-
-  void getData() async {
-    http.Response response = await http.get(Uri.parse(
-        'https://samples.openweathermap.org/data/2.5/weather?q=London&appid=b1b15e88fa797225412429c1c50c122a1'));
-    print(response.body);
-  }
-
-
   @override
   Widget build(BuildContext context) {
-    getData();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -104,7 +106,7 @@ class _InputPageState extends State<InputPage> {
                     textBaseline: TextBaseline.alphabetic,
                     children: [
                       Text(
-                        '0',
+                        '$FlowSensor',
                         style: kNumberedTextStyle,
                       ),
                       Text(
@@ -139,7 +141,7 @@ class _InputPageState extends State<InputPage> {
                           style: kLabelTextStyle,
                         ),
                         Text(
-                          '0 Litres',
+                          '$TankWaterLevel Litres',
                           style: kLabelTextStyle,
                         ),
                       ],
@@ -161,7 +163,7 @@ class _InputPageState extends State<InputPage> {
                           height: 10.0,
                         ),
                         Text(
-                          'Current Tank fill Level = 100% ',
+                          'Current Tank fill Level = $TankPercentageLevel% ',
                           style: kLabelTextStyle,
                           textAlign: TextAlign.center,
                         ),

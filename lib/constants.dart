@@ -1,5 +1,18 @@
 import 'package:flutter/material.dart';
 
+
+
+const kRefreshValuesApi = 'http://192.168.0.149/refreshValues';
+const kFlowSensorApi = 'http://192.168.0.149/readFlowSensor';
+const kHandleRelayApi= 'http://192.168.0.149/handleRelay';
+const kRelaySateApi = 'http://192.168.0.149/getRelayState';
+const kTankPercentageLevelApi = 'http://192.168.0.149/getTankPercentageLevel';
+const kTankWaterLevelApi = 'http://192.168.0.149/getTankWaterLevel';
+const kSetTankCapacityApi = 'http://192.168.0.149/setTankCapacity';
+
+
+
+
 const bottomContainerHeight = 80.0;
 const kActiveCardColor = Color(0xFF1D1E33);
 const bottomContainerColor = Color(0xFFEB1555);
