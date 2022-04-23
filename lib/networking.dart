@@ -6,11 +6,12 @@ class NetworkHelper {
 
   final String url;
 
-  getData() async {
+  Future getData() async {
     http.Response response = await http.get(Uri.parse(url));
 
     if(response.statusCode == 200) {
-      return response.body;
+      String data = response.body.toString();
+      return (data);
     }
     else{
       print(response.statusCode);

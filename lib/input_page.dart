@@ -12,24 +12,30 @@ class InputPage extends StatefulWidget {
   State<InputPage> createState() => _InputPageState();
 }
 
-  String flowReading;
+String flowReading;
 String tankWaterLevel;
 String tankPercentageLevel;
+String flow;
+String level;
+String percentage;
+String refresh;
 
 class _InputPageState extends State<InputPage> {
 
-  Future<String> getFlowReading() async{
-    String flowReading = await NetworkHelper(url: kFlowSensorApi).toString();
-    return flowReading;
-  }
-Future<String> getTankWaterLevel() async{
-    String tankWaterLevel = await NetworkHelper(url: kTankWaterLevelApi).toString();
-    return tankWaterLevel;
-  }
-Future<String> getTankPercentageLevel() async{
-    String  tankPercentageLevel = await NetworkHelper(url: kTankPercentageLevelApi).toString();
-    return tankPercentageLevel;
-  }
+  ApiClass api = ApiClass();
+
+//   Future<String> getFlowReading() async{
+//     String flowReading = await NetworkHelper(url: kFlowSensorApi).toString();
+//     return flowReading;
+//   }
+// Future<String> getTankWaterLevel() async{
+//     String tankWaterLevel = await NetworkHelper(url: kTankWaterLevelApi).toString();
+//     return tankWaterLevel;
+//   }
+// Future<String> getTankPercentageLevel() async{
+//     String  tankPercentageLevel = await NetworkHelper(url: kTankPercentageLevelApi).toString();
+//     return tankPercentageLevel;
+//   }
 
   // dynamic FlowSensor = NetworkHelper(url: kFlowSensorApi);
   // dynamic RefreshValues =  NetworkHelper(url: kRefreshValuesApi);
@@ -38,7 +44,6 @@ Future<String> getTankPercentageLevel() async{
   // dynamic TankPercentageLevel = NetworkHelper(url: kTankPercentageLevelApi);
   // dynamic TankWaterLevel = NetworkHelper(url: kTankWaterLevelApi);
   // dynamic SetTankCapacity = NetworkHelper(url: kSetTankCapacityApi);
-
 
   bool On = false;
   @override
@@ -64,12 +69,12 @@ Future<String> getTankPercentageLevel() async{
                     children: [
                       On
                           ? Icon(
-                              Icons.lightbulb,
+                              Icons.refresh_outlined,
                               size: 70.0,
                               color: Colors.amber,
                             )
                           : Icon(
-                              Icons.lightbulb_outline,
+                              Icons.refresh_outlined,
                               size: 70.0,
                               color: Colors.amber,
                             ),
@@ -80,12 +85,11 @@ Future<String> getTankPercentageLevel() async{
                           onPressed: () {
                             setState(() {
                               On = !On;
-                              getFlowReading();
-                              getTankPercentageLevel();
-                              getTankWaterLevel();
+                              api.getFlowReading();
+
                             });
                           },
-                          child: On ? Text('On') : Text('Off'))
+                          child: On ? Text('refresh') : Text('refresh'))
                     ],
                   ),
                 ),
@@ -127,7 +131,7 @@ Future<String> getTankPercentageLevel() async{
                     children: [
                       Text(
                         // http.get(Uri.parse(kFlowSensorApi)).toString(),
-                        '$flowReading',
+                        '$flow',
                         style: kNumberedTextStyle,
                       ),
                       Text(
