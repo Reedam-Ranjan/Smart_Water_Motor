@@ -12,15 +12,32 @@ class InputPage extends StatefulWidget {
   State<InputPage> createState() => _InputPageState();
 }
 
+  String flowReading;
+String tankWaterLevel;
+String tankPercentageLevel;
+
 class _InputPageState extends State<InputPage> {
 
-  dynamic FlowSensor = NetworkHelper(url: kFlowSensorApi);
-  dynamic RefreshValues =  NetworkHelper(url: kRefreshValuesApi);
-  dynamic HandleRelay = NetworkHelper(url: kHandleRelayApi);
-  dynamic RelayState = NetworkHelper(url: kRelaySateApi);
-  dynamic TankPercentageLevel = NetworkHelper(url: kTankPercentageLevelApi);
-  dynamic TankWaterLevel = NetworkHelper(url: kTankWaterLevelApi);
-  dynamic SetTankCapacity = NetworkHelper(url: kSetTankCapacityApi);
+  Future<String> getFlowReading() async{
+    String flowReading = await NetworkHelper(url: kFlowSensorApi).toString();
+    return flowReading;
+  }
+Future<String> getTankWaterLevel() async{
+    String tankWaterLevel = await NetworkHelper(url: kTankWaterLevelApi).toString();
+    return tankWaterLevel;
+  }
+Future<String> getTankPercentageLevel() async{
+    String  tankPercentageLevel = await NetworkHelper(url: kTankPercentageLevelApi).toString();
+    return tankPercentageLevel;
+  }
+
+  // dynamic FlowSensor = NetworkHelper(url: kFlowSensorApi);
+  // dynamic RefreshValues =  NetworkHelper(url: kRefreshValuesApi);
+  // dynamic HandleRelay = NetworkHelper(url: kHandleRelayApi);
+  // dynamic RelayState = NetworkHelper(url: kRelaySateApi);
+  // dynamic TankPercentageLevel = NetworkHelper(url: kTankPercentageLevelApi);
+  // dynamic TankWaterLevel = NetworkHelper(url: kTankWaterLevelApi);
+  // dynamic SetTankCapacity = NetworkHelper(url: kSetTankCapacityApi);
 
 
   bool On = false;
@@ -63,6 +80,9 @@ class _InputPageState extends State<InputPage> {
                           onPressed: () {
                             setState(() {
                               On = !On;
+                              getFlowReading();
+                              getTankPercentageLevel();
+                              getTankWaterLevel();
                             });
                           },
                           child: On ? Text('On') : Text('Off'))
@@ -106,7 +126,8 @@ class _InputPageState extends State<InputPage> {
                     textBaseline: TextBaseline.alphabetic,
                     children: [
                       Text(
-                        '$FlowSensor',
+                        // http.get(Uri.parse(kFlowSensorApi)).toString(),
+                        '$flowReading',
                         style: kNumberedTextStyle,
                       ),
                       Text(
@@ -141,8 +162,10 @@ class _InputPageState extends State<InputPage> {
                           style: kLabelTextStyle,
                         ),
                         Text(
-                          '$TankWaterLevel Litres',
+                          // http.get(Uri.parse(kTankWaterLevelApi)).toString(),
+                          '$tankWaterLevel litres',
                           style: kLabelTextStyle,
+                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),
@@ -163,11 +186,11 @@ class _InputPageState extends State<InputPage> {
                           height: 10.0,
                         ),
                         Text(
-                          'Current Tank fill Level = $TankPercentageLevel% ',
+                          // http.get(Uri.parse(kTankPercentageLevelApi)).toString(),
+                          'Current Tank Fill Level = $tankWaterLevel %',
                           style: kLabelTextStyle,
                           textAlign: TextAlign.center,
                         ),
-
                         // Text('100 %',style: kLabelTextStyle,
                         // textAlign: TextAlign.center,),
                       ],

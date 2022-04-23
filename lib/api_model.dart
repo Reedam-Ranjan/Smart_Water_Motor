@@ -49,6 +49,7 @@ class _ApiModelState extends State<ApiModel> {
 }
 
 dynamic FlowSensor = NetworkHelper(url: kFlowSensorApi);
+
 dynamic RefreshValues =  NetworkHelper(url: kRefreshValuesApi);
 dynamic HandleRelay = NetworkHelper(url: kHandleRelayApi);
 dynamic RelayState = NetworkHelper(url: kRelaySateApi);
