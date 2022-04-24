@@ -25,6 +25,7 @@ class _InputPageState extends State<InputPage> {
   ApiClass api = ApiClass();
   int flower = 0;
 
+
 //   Future<String> getFlowReading() async{
 //     String flowReading = await NetworkHelper(url: kFlowSensorApi).toString();
 //     return flowReading;
@@ -68,8 +69,12 @@ class _InputPageState extends State<InputPage> {
                   cardChild: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.refresh_outlined,
+                      On? Icon(
+                        Icons.lightbulb,
+                        size: 70.0,
+                        color: Colors.amber,
+                      ) : Icon(
+                        Icons.lightbulb_outline,
                         size: 70.0,
                         color: Colors.amber,
                       ),
@@ -80,11 +85,14 @@ class _InputPageState extends State<InputPage> {
                           onPressed: () {
                             setState(() {
                               On = !On;
-                              api.getFlowReading();
-                              flower = Random().nextInt(10);
+                              // api.getFlowReading();
+                              flower=0;
+                              level = 1.00.toString();
+                              percentage =100.toString();
+
                             });
                           },
-                          child: On ? Text('refresh') : Text('refresh'))
+                          child: On ? Text('On') : Text('Off'))
                     ],
                   ),
                 ),
@@ -95,11 +103,23 @@ class _InputPageState extends State<InputPage> {
                   cardChild: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('TANK CAPACITY', style: kLabelTextStyle),
-                      Text(
-                        '10 L',
-                        style: kLabelTextStyle,
-                      )
+                      Icon(
+                        Icons.refresh_outlined,
+                        size: 70.0,
+                        color: Colors.green,
+                      ),
+                      ElevatedButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.green,
+                        ),
+                        onPressed: (){
+                          setState(() {
+                            flower = Random().nextInt(10);
+
+                          });
+                        },
+                        child: Text('refresh'),
+                        ),
                     ],
                   ),
                 ),
@@ -162,7 +182,7 @@ class _InputPageState extends State<InputPage> {
                         ),
                         Text(
                           // http.get(Uri.parse(kTankWaterLevelApi)).toString(),
-                          '$tankWaterLevel litres',
+                          '$level litres',
                           style: kLabelTextStyle,
                           textAlign: TextAlign.center,
                         ),
@@ -186,7 +206,7 @@ class _InputPageState extends State<InputPage> {
                         ),
                         Text(
                           // http.get(Uri.parse(kTankPercentageLevelApi)).toString(),
-                          'Current Tank Fill Level = $tankWaterLevel %',
+                          'Current Tank Fill Level = $percentage %',
                           style: kLabelTextStyle,
                           textAlign: TextAlign.center,
                         ),
