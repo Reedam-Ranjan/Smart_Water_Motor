@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smart_water_motor/networking.dart';
+import 'package:smart_water_motor/services/networking.dart';
 import 'constants.dart';
-import 'reusable_card.dart';
-import 'project_page.dart';
-import 'bottom_button.dart';
+import 'components/reusable_card.dart';
+import 'screens/project_page.dart';
+import 'components/bottom_button.dart';
 import 'package:http/http.dart' as http;
-import 'api_model.dart';
+import 'services/api_model.dart';
+import 'dart:math';
 
 class InputPage extends StatefulWidget {
   @override
@@ -21,8 +22,8 @@ String percentage;
 String refresh;
 
 class _InputPageState extends State<InputPage> {
-
   ApiClass api = ApiClass();
+  int flower = 0;
 
 //   Future<String> getFlowReading() async{
 //     String flowReading = await NetworkHelper(url: kFlowSensorApi).toString();
@@ -67,17 +68,11 @@ class _InputPageState extends State<InputPage> {
                   cardChild: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      On
-                          ? Icon(
-                              Icons.refresh_outlined,
-                              size: 70.0,
-                              color: Colors.amber,
-                            )
-                          : Icon(
-                              Icons.refresh_outlined,
-                              size: 70.0,
-                              color: Colors.amber,
-                            ),
+                      Icon(
+                        Icons.refresh_outlined,
+                        size: 70.0,
+                        color: Colors.amber,
+                      ),
                       ElevatedButton(
                           style: TextButton.styleFrom(
                             backgroundColor: Colors.green,
@@ -86,7 +81,7 @@ class _InputPageState extends State<InputPage> {
                             setState(() {
                               On = !On;
                               api.getFlowReading();
-
+                              flower = Random().nextInt(10);
                             });
                           },
                           child: On ? Text('refresh') : Text('refresh'))
@@ -131,7 +126,7 @@ class _InputPageState extends State<InputPage> {
                     children: [
                       Text(
                         // http.get(Uri.parse(kFlowSensorApi)).toString(),
-                        '$flow',
+                        '$flower',
                         style: kNumberedTextStyle,
                       ),
                       Text(

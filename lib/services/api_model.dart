@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import '../constants.dart';
 import 'networking.dart';
 import 'package:http/http.dart' as http;
-import 'input_page.dart';
+import '../input_page.dart';
 
 class ApiClass {
 
@@ -38,9 +38,6 @@ class ApiClass {
     print(percentage);
     return percentage;
   }
-
-
-
 
   // Future getRefreshValues() async {
   //   dynamic RefreshValues = await NetworkHelper(url: kRefreshValuesApi);

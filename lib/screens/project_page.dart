@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smart_water_motor/reusable_card.dart';
-import 'constants.dart';
-import 'bottom_button.dart';
+import 'package:smart_water_motor/components/reusable_card.dart';
+import '../constants.dart';
+import '../components/bottom_button.dart';
 
 class ProjectPage extends StatelessWidget {
   @override
@@ -49,21 +49,21 @@ class ProjectPage extends StatelessWidget {
                         height: 5.0,
                       ),
                       Text(
-                        'Samridhi Wadhwa : 1805686',
+                        'Samridhi Wadhwa : 1805154',
                         style: kLabelTextStyle,
                       ),
                       SizedBox(
                         height: 5.0,
                       ),
                       Text(
-                        'Nandini Kalita : 1805686',
+                        'Nandini Kalita : 1805675',
                         style: kLabelTextStyle,
                       ),
                       SizedBox(
                         height: 5.0,
                       ),
                       Text(
-                        'Surodeep Dhar : 1805686',
+                        'Surodeep Dhar : 1805711',
                         style: kLabelTextStyle,
                       ),
                       SizedBox(
